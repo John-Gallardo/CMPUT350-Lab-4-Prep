@@ -26,6 +26,7 @@ uint64_t expand(uint64_t input, uint32_t scale) {
         expandedBits |= currVal << currBitToSet;
         // scale - 1 by definition, + 1 since we are moving onto the next bit
         currBitToSet += (scale - 1) + 1;
+        input >>= 1;  // move onto next value to set
     }
     return expandedBits;
 }
@@ -37,6 +38,7 @@ int main() {
     std::cout << std::bitset<64>(res1) << '\n';
     assert(res1 == 0b001001001001);
 
+    // NOTE: this technically doesn't 'expand' for leading 0s (since numBits doesn't count leading 0s) but I don't think it matters
     uint64_t res2{expand(0b0101, 2)};
     std::cout << std::bitset<64>(res2) << '\n';
     assert(res2 == 0b00010001);
