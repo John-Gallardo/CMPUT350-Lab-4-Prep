@@ -36,7 +36,7 @@ class Timer {
 
         // literally the same as click() but doesn't restart time
         template <typename T>
-        uint64_t glance() {
+        uint64_t glance() const {
             auto timeNow{std::chrono::steady_clock::now()};
             return std::chrono::duration_cast<T>(timeNow - m_time).count();
         }
